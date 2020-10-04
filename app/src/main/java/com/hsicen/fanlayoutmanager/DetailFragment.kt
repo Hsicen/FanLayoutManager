@@ -22,7 +22,7 @@ class DetailFragment : Fragment() {
     super.onCreate(savedInstanceState)
 
     mTemplate = arguments?.getParcelable(TRANS_DATA)
-    mTemplate = savedInstanceState?.getParcelable(TRANS_DATA)
+    //mTemplate = savedInstanceState?.getParcelable(TRANS_DATA)
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

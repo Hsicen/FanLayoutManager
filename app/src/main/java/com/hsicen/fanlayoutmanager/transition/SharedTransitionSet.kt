@@ -1,9 +1,9 @@
 package com.hsicen.fanlayoutmanager.transition
 
-import androidx.transition.ChangeBounds
-import androidx.transition.ChangeImageTransform
-import androidx.transition.ChangeTransform
-import androidx.transition.TransitionSet
+import android.transition.ChangeBounds
+import android.transition.ChangeImageTransform
+import android.transition.ChangeTransform
+import android.transition.TransitionSet
 
 /**
  * 作者：hsicen  2020/10/4 16:57

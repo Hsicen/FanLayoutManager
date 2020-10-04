@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.hsicen.fanlayoutmanager.model.SportCardsUtils
 import com.hsicen.fanlayoutmanager.transition.SharedTransitionSet
-import com.hsicen.library.FanLayoutManager
-import com.hsicen.library.FanLayoutManagerSettings
-import com.hsicen.library.listener.FanChildDrawingOrderCallback
+import com.hsicen.library.java.FanLayoutManager
+import com.hsicen.library.java.FanLayoutManagerSettings
+import com.hsicen.library.java.callbacks.FanChildDrawingOrderCallback
 import kotlinx.android.synthetic.main.fragment_main.*
 
 /**
