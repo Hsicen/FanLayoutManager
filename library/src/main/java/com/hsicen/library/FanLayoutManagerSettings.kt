@@ -90,7 +90,6 @@ class FanLayoutManagerSettings private constructor(builder: Builder) {
     private const val DEFAULT_VIEW_WIDTH_DP = 120f
     private const val DEFAULT_VIEW_HEIGHT_DP = 160f
 
-    @JvmStatic
     fun newBuilder(context: Context): Builder {
       return Builder(context)
     }

@@ -15,7 +15,7 @@ import kotlin.math.abs
  * 功能：
  * 描述：Item选中动画实现类
  */
-class AnimationHelperImpl() : AnimationHelper {
+class AnimationHelperImpl : AnimationHelper {
 
   //Item选中时的缩放因子
   override val viewScaleFactor = ANIMATION_VIEW_SCALE_FACTOR

@@ -10,8 +10,10 @@ import android.view.View
  * 功能：
  * 描述：惯性滑动处理类
  */
-internal class FanCardScroller(context: Context) : BaseSmoothScroller(context) {
-  var cardTimeCallback: FanCardTimeCallback? = null
+internal class FanCardScroller(
+  context: Context,
+  private val cardTimeCallback: ((targetPosition: Int, time: Int) -> Unit)? = null
+) : BaseSmoothScroller(context) {
 
   override fun getHorizontalSnapPreference(): Int = SNAP_TO_START
 
@@ -26,7 +28,7 @@ internal class FanCardScroller(context: Context) : BaseSmoothScroller(context) {
 
   override fun calculateTimeForScrolling(dx: Int): Int {
     val time = super.calculateTimeForScrolling(dx)
-    cardTimeCallback?.onTimeForScrollingCalculated(targetPosition, time)
+    cardTimeCallback?.invoke(targetPosition, time)
 
     return time
   }
@@ -35,12 +37,8 @@ internal class FanCardScroller(context: Context) : BaseSmoothScroller(context) {
     return MILLISECONDS_PER_INCH / displayMetrics.densityDpi
   }
 
-  internal interface FanCardTimeCallback {
-
-    fun onTimeForScrollingCalculated(targetPosition: Int, time: Int)
-  }
-
   companion object {
+    //每英寸滑动需要的时间
     private const val MILLISECONDS_PER_INCH = 200f
   }
 }

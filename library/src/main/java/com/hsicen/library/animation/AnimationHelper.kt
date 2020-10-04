@@ -13,28 +13,28 @@ import androidx.recyclerview.widget.RecyclerView
  */
 interface AnimationHelper {
 
-  /** 选中动画
+  /***
+   * 选中动画
    * @param view view to scale (open)
    * @param delay start delay duration
-   * @param animatorListener select view animation listener
-   */
+   * @param animatorListener select view animation listener */
   fun openItem(view: View, delay: Int, animatorListener: Animator.AnimatorListener)
 
 
-  /** 取消选中动画
+  /***
+   * 取消选中动画
    * @param view view to scale (close)
    * @param delay start delay
-   * @param animatorListener deselect view animation listener
-   */
+   * @param animatorListener deselect view animation listener */
   fun closeItem(view: View, delay: Int, animatorListener: Animator.AnimatorListener)
 
-  /** View滑动时动画处理
+  /***
+   * View滑动时动画处理
    * @param views view data information for shift animation [ViewAnimationInfo]
    * @param delay start delay
    * @param layoutManager the layout manager
    * @param animatorListener animator listener to check start or end animation
-   * @param animatorUpdateListener value animator listener to check updates
-   */
+   * @param animatorUpdateListener value animator listener to check updates */
   fun shiftSideViews(
     views: List<ViewAnimationInfo>,
     delay: Int,
@@ -43,25 +43,21 @@ interface AnimationHelper {
     animatorUpdateListener: AnimatorUpdateListener
   )
 
-  /**
-   * @return Item选中或取消选中的缩放因子
-   */
+  /***
+   * 选中时的缩放因子
+   * @return Item选中或取消选中的缩放因子 */
   val viewScaleFactor: Float
 
-  /**
+  /***
    * 旋转View的角度为0
-   *
    * @param view view to rotate
-   * @param listener animator listener to check start or end animation
-   */
+   * @param listener animator listener to check start or end animation */
   fun straightenView(view: View, listener: Animator.AnimatorListener)
 
-  /**
+  /***
    * 旋转View到指定角度
-   *
    * @param view view to rotate
    * @param angle rotate angle
-   * @param listener animator listener to check start or end animation
-   */
+   * @param listener animator listener to check start or end animation */
   fun rotateView(view: View, angle: Float, listener: Animator.AnimatorListener)
 }
