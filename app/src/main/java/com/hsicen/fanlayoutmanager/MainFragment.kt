@@ -5,7 +5,6 @@ import android.transition.Fade
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.hsicen.fanlayoutmanager.model.SportCardsUtils
@@ -32,6 +31,9 @@ class MainFragment : Fragment() {
       .withAngleItemBounce(0f)
       .withViewHeightDp(212f)
       .withViewWidthDp(212f)
+      .withItemMargin(17.dp2px)
+      .withTopMargin(16.dp2px)
+      .withBottomMargin(32.dp2px)
       .build()
 
     FanLayoutManager(requireActivity(), settings)
@@ -62,7 +64,6 @@ class MainFragment : Fragment() {
     mFanLayoutManager.addOnItemSelectedListener { position, _ ->
       if (lastSelect != position) {
         lastSelect = position
-        Toast.makeText(activity, "当前选中Item: $position", Toast.LENGTH_SHORT).show()
         //mFanLayoutManager.switchItem(rvTemplate, position)
       }
     }

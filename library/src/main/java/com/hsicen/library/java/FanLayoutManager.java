@@ -161,7 +161,9 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
       @Override
       public void onTimeForScrollingCalculated(int targetPosition, int time) {
         // select item after scroll to item
-        //selectItem(targetPosition, time);
+        if (settings.isClickScale()) {
+          selectItem(targetPosition, time);
+        }
       }
     });
     // create default smooth scroller to show item in the middle of the screen
@@ -369,7 +371,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
     long scaledWidth = (long) (mSettings.getViewWidthPx() * mAnimationHelper.getViewScaleFactor());
     //这里可以设置RecyclerView的高度
     int height = heightMode == View.MeasureSpec.EXACTLY ? View.MeasureSpec.getSize(heightSpec) :
-                 (int) (Math.sqrt(scaledHeight * scaledHeight + scaledWidth * scaledWidth));
+                 (int) (scaledHeight + mSettings.getTopMargin() + mSettings.getBottomMargin());
 
     //noinspection Range
     heightSpec = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY);
@@ -528,17 +530,17 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
     int leftViewPosition = centerViewPosition;
 
     // margin to draw cards in bottom  设置Item距离底部的高度 (mSettings.getViewWidthPx() / 4)
-    final int baseTopMargin = Math.max(0, getHeight() - mSettings.getViewHeightPx() - mSettings.getViewWidthPx() / 4);
+    final int baseTopMargin = Math.max(0, getHeight() - mSettings.getViewHeightPx() - mSettings.getBottomMargin());
     //设置Item的水平间隔
     int overlapDistance;
     if (mIsCollapsed) {
 
       // overlap distance if views are collapsed
-      overlapDistance = -mSettings.getViewWidthPx() / 4;
+      overlapDistance = -mSettings.getItemMargin();
     } else {
 
       // overlap distance if views aren't collapsed
-      overlapDistance = mSettings.getViewWidthPx() / 4;
+      overlapDistance = mSettings.getItemMargin();
     }
 
     boolean fillRight = true;

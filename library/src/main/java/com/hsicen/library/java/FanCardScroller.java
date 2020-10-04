@@ -13,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * @version 1.0
  */
 class FanCardScroller extends BaseSmoothScroller {
-  //TODO Need to change this to make it more flexible.
-  private static final float MILLISECONDS_PER_INCH = 200F;
+  private static final float MILLISECONDS_PER_INCH = 80F;
 
   @Nullable
   private FanCardTimeCallback mCardTimeCallback;

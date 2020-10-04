@@ -17,6 +17,43 @@ public class FanLayoutManagerSettings {
   private int mViewHeightPx;
   private boolean mIsFanRadiusEnable;
   private float mAngleItemBounce;
+  private int mItemMargin;
+  private boolean mClickScale;
+
+  public int getItemMargin() {
+    return mItemMargin;
+  }
+
+  public boolean isClickScale() {
+    return mClickScale;
+  }
+
+  public void setClickScale(boolean mClickScale) {
+    this.mClickScale = mClickScale;
+  }
+
+  public void setItemMargin(int mItemMargin) {
+    this.mItemMargin = mItemMargin;
+  }
+
+  public int getTopMargin() {
+    return mTopMargin;
+  }
+
+  public void setTopMargin(int mTopMargin) {
+    this.mTopMargin = mTopMargin;
+  }
+
+  public int getBottomMargin() {
+    return mBottomMargin;
+  }
+
+  public void setBottomMargin(int mBottomMargin) {
+    this.mBottomMargin = mBottomMargin;
+  }
+
+  private int mTopMargin;
+  private int mBottomMargin;
 
   private FanLayoutManagerSettings(Builder builder) {
     mViewWidthDp = builder.mViewWidthDp;
@@ -25,6 +62,10 @@ public class FanLayoutManagerSettings {
     mAngleItemBounce = builder.mAngleItemBounce;
     mViewWidthPx = builder.mViewWidthPx;
     mViewHeightPx = builder.mViewHeightPx;
+    mItemMargin = builder.mItemMargin;
+    mTopMargin = builder.mTopMargin;
+    mBottomMargin = builder.mBottomMargin;
+    mClickScale = builder.mClickScale;
   }
 
   public static Builder newBuilder(Context context) {
@@ -67,6 +108,10 @@ public class FanLayoutManagerSettings {
     private float mAngleItemBounce;
     private int mViewWidthPx;
     private int mViewHeightPx;
+    private int mItemMargin;
+    private int mTopMargin;
+    private int mBottomMargin;
+    private boolean mClickScale;
 
     private Builder(Context context) {
       mContext = context;
@@ -120,6 +165,38 @@ public class FanLayoutManagerSettings {
         return this;
       }
       mAngleItemBounce = Math.min(BOUNCE_MAX, angleItemBounce);
+      return this;
+    }
+
+    public Builder withItemMargin(int itemMargin) {
+      if (itemMargin <= 0F) {
+        return this;
+      }
+
+      mItemMargin = itemMargin;
+      return this;
+    }
+
+    public Builder withTopMargin(int topMargin) {
+      if (topMargin <= 0F) {
+        return this;
+      }
+
+      mTopMargin = topMargin;
+      return this;
+    }
+
+    public Builder withBottomMargin(int bottomMargin) {
+      if (bottomMargin <= 0F) {
+        return this;
+      }
+
+      mBottomMargin = bottomMargin;
+      return this;
+    }
+
+    public Builder withClickScale(boolean clickScale) {
+      mClickScale = clickScale;
       return this;
     }
 
