@@ -28,10 +28,10 @@ class MainFragment : Fragment() {
     //设置默认配置
     val settings: FanLayoutManagerSettings = FanLayoutManagerSettings
       .newBuilder(requireActivity())
-      .withFanRadius(false)
+      .withFanRadius(true)
       .withAngleItemBounce(0f)
-      .withViewHeightDp(180f)
-      .withViewWidthDp(180f)
+      .withViewHeightDp(212f)
+      .withViewWidthDp(212f)
       .build()
 
     FanLayoutManager(requireActivity(), settings)
@@ -63,7 +63,7 @@ class MainFragment : Fragment() {
       if (lastSelect != position) {
         lastSelect = position
         Toast.makeText(activity, "当前选中Item: $position", Toast.LENGTH_SHORT).show()
-        mFanLayoutManager.switchItem(rvTemplate, position)
+        //mFanLayoutManager.switchItem(rvTemplate, position)
       }
     }
 

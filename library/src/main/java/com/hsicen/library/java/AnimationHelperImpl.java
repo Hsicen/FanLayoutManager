@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
  */
 class AnimationHelperImpl implements AnimationHelper {
   // scale factor for view in open/close animations
-  private static final float ANIMATION_VIEW_SCALE_FACTOR = 1.2f;
+  private static final float ANIMATION_VIEW_SCALE_FACTOR = 1f;
 
   // base duration for open animation
   private static final int ANIMATION_SINGLE_OPEN_DURATION = 300;

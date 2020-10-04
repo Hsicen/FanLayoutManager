@@ -161,7 +161,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
       @Override
       public void onTimeForScrollingCalculated(int targetPosition, int time) {
         // select item after scroll to item
-        selectItem(targetPosition, time);
+        //selectItem(targetPosition, time);
       }
     });
     // create default smooth scroller to show item in the middle of the screen
@@ -367,6 +367,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
     int heightMode = View.MeasureSpec.getMode(heightSpec);
     long scaledHeight = (long) (mSettings.getViewHeightPx() * mAnimationHelper.getViewScaleFactor());
     long scaledWidth = (long) (mSettings.getViewWidthPx() * mAnimationHelper.getViewScaleFactor());
+    //这里可以设置RecyclerView的高度
     int height = heightMode == View.MeasureSpec.EXACTLY ? View.MeasureSpec.getSize(heightSpec) :
                  (int) (Math.sqrt(scaledHeight * scaledHeight + scaledWidth * scaledWidth));
 
@@ -526,8 +527,9 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
     int leftViewOffset = centerViewOffset;
     int leftViewPosition = centerViewPosition;
 
-    // margin to draw cards in bottom
+    // margin to draw cards in bottom  设置Item距离底部的高度 (mSettings.getViewWidthPx() / 4)
     final int baseTopMargin = Math.max(0, getHeight() - mSettings.getViewHeightPx() - mSettings.getViewWidthPx() / 4);
+    //设置Item的水平间隔
     int overlapDistance;
     if (mIsCollapsed) {
 
@@ -711,7 +713,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
             mIsSelectAnimationInProcess = true;
             mIsWaitingToSelectAnimation = false;
             // shift distance between center view and left, right views.
-            final int delta = 8;
+            final int delta = 0; //设置缩放的偏移量
             // generate data for animation helper. (calculate final positions for all views)
             final Collection<ViewAnimationInfo> infoViews = ViewAnimationInfoGenerator.generate(delta,
                 true,
@@ -833,7 +835,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
         mIsWaitingToDeselectAnimation = false;
 
         // shift distance between center view and left, right views.
-        final int delta = 8;
+        final int delta = 0; //设置缩放的偏移量
 
         // generate data for animation helper. (calculate final positions for all views)
         final Collection<ViewAnimationInfo> infoViews =
