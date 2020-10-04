@@ -17,7 +17,6 @@ import com.hsicen.library.animation.AnimationHelper
 import com.hsicen.library.animation.AnimationHelperImpl
 import com.hsicen.library.animation.SimpleAnimatorListener
 import com.hsicen.library.animation.ViewAnimationInfoGenerator.generate
-import com.hsicen.library.listener.ItemSelectedListener
 import com.hsicen.library.scroller.FanCardScroller
 import com.hsicen.library.scroller.ShiftToCenterCardScroller
 import java.util.*
@@ -69,12 +68,12 @@ class FanLayoutManager @JvmOverloads constructor(
 
   private var mPendingSavedState: SavedState? = null
   private var mCenterView: View? = null
-  private var mSelectedListener: ItemSelectedListener? = null
+  private var mSelectedListener: ((position: Int, selectedView: View?) -> Unit)? = null
 
   val isItemSelected: Boolean //当前是否有Item选中
     get() = selectedItemPosition != RecyclerView.NO_POSITION
 
-  fun addOnItemSelectedListener(listener: ItemSelectedListener?) {
+  fun addOnItemSelectedListener(listener: (position: Int, selectedView: View?) -> Unit) {
     mSelectedListener = listener
   }
 
@@ -702,7 +701,7 @@ class FanLayoutManager @JvmOverloads constructor(
     if (nearestToCenterView != null) {
       mShiftToCenterCardScroller.targetPosition = getPosition(nearestToCenterView)
       startSmoothScroll(mShiftToCenterCardScroller)
-      mSelectedListener?.onItemSelected(getPosition(nearestToCenterView), nearestToCenterView)
+      mSelectedListener?.invoke(getPosition(nearestToCenterView), nearestToCenterView)
     }
   }
 
@@ -931,40 +930,31 @@ class FanLayoutManager @JvmOverloads constructor(
     }
   }
 
-  private class SavedState() : Parcelable {
-    var mCenterItemPosition = RecyclerView.NO_POSITION
-    var isCollapsed = false
-    var isSelected = false
-    var mRotation: SparseArray<Float>? = null
+  data class SavedState(
+    var mCenterItemPosition: Int = RecyclerView.NO_POSITION,
+    var isCollapsed: Boolean = false,
+    var isSelected: Boolean = false,
+    var mRotation: SparseArray<Float>? = SparseArray()
+  ) : Parcelable {
 
-    constructor(inData: Parcel) {
-      mCenterItemPosition = inData.readInt()
-      isCollapsed = inData.readInt() == 1
-      isSelected = inData.readInt() == 1
-      mRotation = inData.readSparseArray(SparseArray::class.java.classLoader)
-    }
+    constructor(parcel: Parcel) : this(
+      parcel.readInt(),
+      parcel.readByte() != 0.toByte(),
+      parcel.readByte() != 0.toByte(),
+      parcel.readSparseArray(SparseArray::class.java.classLoader)
+    )
 
-    constructor(other: SavedState) {
-      mCenterItemPosition = other.mCenterItemPosition
-      isCollapsed = other.isCollapsed
-      isSelected = other.isSelected
-      mRotation = other.mRotation
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+      parcel.writeInt(mCenterItemPosition)
+      parcel.writeByte(if (isCollapsed) 1 else 0)
+      parcel.writeByte(if (isSelected) 1 else 0)
     }
 
     override fun describeContents(): Int = 0
 
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-      dest.writeInt(mCenterItemPosition)
-      dest.writeInt(if (isCollapsed) 1 else 0)
-      dest.writeInt(if (isSelected) 1 else 0)
-      dest.writeSparseArray(mRotation)
-    }
-
-    companion object {
-      val CREATOR: Parcelable.Creator<SavedState> = object : Parcelable.Creator<SavedState> {
-        override fun createFromParcel(inData: Parcel): SavedState? = SavedState(inData)
-        override fun newArray(size: Int): Array<SavedState?> = arrayOfNulls(size)
-      }
+    companion object CREATOR : Parcelable.Creator<SavedState> {
+      override fun createFromParcel(parcel: Parcel): SavedState? = SavedState(parcel)
+      override fun newArray(size: Int): Array<SavedState?> = arrayOfNulls(size)
     }
   }
 }

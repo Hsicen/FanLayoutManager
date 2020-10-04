@@ -10,7 +10,7 @@ import android.view.View
  * 功能：
  * 描述：卡片滑动时，展示中心Item逻辑处理
  */
-internal class ShiftToCenterCardScroller(context: Context) : BaseSmoothScroller(context) {
+class ShiftToCenterCardScroller(context: Context) : BaseSmoothScroller(context) {
 
   override fun getHorizontalSnapPreference(): Int {
     return SNAP_TO_START

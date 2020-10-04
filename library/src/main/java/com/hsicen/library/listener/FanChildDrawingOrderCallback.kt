@@ -14,28 +14,24 @@ class FanChildDrawingOrderCallback(layoutManager: RecyclerView.LayoutManager) : 
   private val mLayoutManager = WeakReference(layoutManager)
 
   override fun onGetChildDrawingOrder(childCount: Int, i: Int): Int {
+    val layoutManager = mLayoutManager.get() ?: return i
+    val startView = layoutManager.getChildAt(0) ?: return i
 
-    val layoutManager = mLayoutManager.get()
-    if (layoutManager != null) {
-      val startView = layoutManager.getChildAt(0) ?: return i
-      val position = layoutManager.getPosition(startView)
-      val isStartFromBelow = position % 2 == 0
+    val position = layoutManager.getPosition(startView)
+    val isStartFromBelow = position % 2 == 0
 
-      return if (isStartFromBelow) {
-        if (i % 2 == 0) {
-          if (i == 0) 0 else i - 1
-        } else {
-          if (i + 1 >= childCount) i else i + 1
-        }
+    return if (isStartFromBelow) {
+      if (i % 2 == 0) {
+        if (i == 0) 0 else i - 1
       } else {
-        if (i % 2 == 0) {
-          if (i + 1 >= childCount) i else i + 1
-        } else {
-          i - 1
-        }
+        if (i + 1 >= childCount) i else i + 1
+      }
+    } else {
+      if (i % 2 == 0) {
+        if (i + 1 >= childCount) i else i + 1
+      } else {
+        i - 1
       }
     }
-
-    return i
   }
 }
