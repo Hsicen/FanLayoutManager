@@ -161,7 +161,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
       @Override
       public void onTimeForScrollingCalculated(int targetPosition, int time) {
         // select item after scroll to item
-        //selectItem(targetPosition, time);
+        selectItem(targetPosition, time);
       }
     });
     // create default smooth scroller to show item in the middle of the screen
@@ -711,7 +711,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
             mIsSelectAnimationInProcess = true;
             mIsWaitingToSelectAnimation = false;
             // shift distance between center view and left, right views.
-            final int delta = mSettings.getViewWidthPx() / 2;
+            final int delta = 8;
             // generate data for animation helper. (calculate final positions for all views)
             final Collection<ViewAnimationInfo> infoViews = ViewAnimationInfoGenerator.generate(delta,
                 true,
@@ -833,7 +833,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
         mIsWaitingToDeselectAnimation = false;
 
         // shift distance between center view and left, right views.
-        final int delta = mSettings.getViewWidthPx() / 2;
+        final int delta = 8;
 
         // generate data for animation helper. (calculate final positions for all views)
         final Collection<ViewAnimationInfo> infoViews =

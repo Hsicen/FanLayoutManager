@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
  */
 class AnimationHelperImpl implements AnimationHelper {
   // scale factor for view in open/close animations
-  private static final float ANIMATION_VIEW_SCALE_FACTOR = 1.5f;
+  private static final float ANIMATION_VIEW_SCALE_FACTOR = 1.2f;
 
   // base duration for open animation
   private static final int ANIMATION_SINGLE_OPEN_DURATION = 300;
@@ -37,7 +37,7 @@ class AnimationHelperImpl implements AnimationHelper {
   private static final int ANIMATION_SHIFT_VIEWS_DELAY_THRESHOLD = 50;
 
   // base threshold duration for open/close animation (bounce effect)
-  private static final float ANIMATION_VIEW_SCALE_FACTOR_THRESHOLD = 0.4F;
+  private static final float ANIMATION_VIEW_SCALE_FACTOR_THRESHOLD = 0F;
 
   @Override
   public void openItem(@NotNull final View view, int delay, Animator.AnimatorListener animatorListener) {
@@ -89,7 +89,7 @@ class AnimationHelperImpl implements AnimationHelper {
   private void scaleView(final View view, float value) {
 
     // change pivot point to the bottom middle
-    view.setPivotX(view.getWidth() / 2);
+    view.setPivotX(view.getWidth() / 2f);
     view.setPivotY(view.getHeight());
 
     // scale view

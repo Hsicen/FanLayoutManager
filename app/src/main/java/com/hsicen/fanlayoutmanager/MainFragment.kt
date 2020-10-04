@@ -63,6 +63,7 @@ class MainFragment : Fragment() {
       if (lastSelect != position) {
         lastSelect = position
         Toast.makeText(activity, "当前选中Item: $position", Toast.LENGTH_SHORT).show()
+        mFanLayoutManager.switchItem(rvTemplate, position)
       }
     }
 
@@ -92,7 +93,7 @@ class MainFragment : Fragment() {
         .beginTransaction()
         .addSharedElement(view, "shared")
         .replace(R.id.root, fragment)
-        .addToBackStack(null)
+        .addToBackStack("home")
         .commit()
     }
   }
