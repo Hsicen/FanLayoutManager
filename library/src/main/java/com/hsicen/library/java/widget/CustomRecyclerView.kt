@@ -1,4 +1,4 @@
-package com.hsicen.fanlayoutmanager
+package com.hsicen.library.java.widget
 
 import android.content.Context
 import android.util.AttributeSet
