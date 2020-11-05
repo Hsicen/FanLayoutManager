@@ -21,97 +21,97 @@ import kotlinx.android.synthetic.main.fragment_main.*
  * 描述：主页Fragment
  */
 class MainFragment : Fragment() {
-  private var lastSelect = -1
+    private var lastSelect = -1
 
-  private val mFanLayoutManager by lazy {
-    //设置默认配置
-    val settings: FanLayoutManagerSettings = FanLayoutManagerSettings
-      .newBuilder(requireActivity())
-      .withFanRadius(false)
-      .withViewHeightDp(212f)
-      .withViewWidthDp(212f)
-      .withItemMargin(16.dp2px)
-      .withTopMargin(16.dp2px)
-      .withBottomMargin(16.dp2px)
-      .build()
+    private val mFanLayoutManager by lazy {
+        //设置默认配置
+        val settings: FanLayoutManagerSettings = FanLayoutManagerSettings
+            .newBuilder(requireActivity())
+            .withFanRadius(true)
+            .withViewHeightDp(212f)
+            .withViewWidthDp(212f)
+            .withItemMargin(16.dp2px)
+            .withTopMargin(16.dp2px)
+            .withBottomMargin(16.dp2px)
+            .build()
 
-    FanLayoutManager(requireActivity(), settings)
-  }
-
-  private val adapter by lazy {
-    SportCardsAdapter()
-  }
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_main, container, false)
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
-    rvTemplate.layoutManager = mFanLayoutManager
-    mFanLayoutManager.collapseViews()
-    rvTemplate.itemAnimator = DefaultItemAnimator()
-
-    adapter.addAll(SportCardsUtils.generateSportCards())
-    rvTemplate.adapter = adapter
-    rvTemplate.setChildDrawingOrderCallback(FanChildDrawingOrderCallback(mFanLayoutManager))
-
-    //LayoutManager的Item选中回调
-    mFanLayoutManager.addOnItemSelectedListener { position, _ ->
-      if (lastSelect != position) {
-        lastSelect = position
-        //mFanLayoutManager.switchItem(rvTemplate, position)
-      }
+        FanLayoutManager(requireActivity(), settings)
     }
 
-    btnChange.setOnClickListener {
-      mFanLayoutManager.collapseViews()
+    private val adapter by lazy {
+        SportCardsAdapter()
     }
 
-    //Item点击回调
-    adapter.setOnItemClickListener { itemPosition, clickView ->
-      if (lastSelect == itemPosition) {
-        onClick(clickView, itemPosition)
-      } else {
-        mFanLayoutManager.smoothScrollToPosition(rvTemplate, null, itemPosition)
-      }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_main, container, false)
     }
-  }
 
-  private fun onClick(view: View, pos: Int) {
-    val fragment: DetailFragment = DetailFragment.newInstance(adapter.getModelByPos(pos))
-    fragment.sharedElementEnterTransition = SharedTransitionSet()
-    fragment.enterTransition = Fade()
-    exitTransition = Fade()
-    fragment.sharedElementReturnTransition = SharedTransitionSet()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    activity?.apply {
-      supportFragmentManager
-        .beginTransaction()
-        .addSharedElement(view, "shared")
-        .replace(R.id.root, fragment)
-        .addToBackStack("home")
-        .commit()
+        rvTemplate.layoutManager = mFanLayoutManager
+        mFanLayoutManager.collapseViews()
+        rvTemplate.itemAnimator = DefaultItemAnimator()
+
+        adapter.addAll(SportCardsUtils.generateSportCards())
+        rvTemplate.adapter = adapter
+        rvTemplate.setChildDrawingOrderCallback(FanChildDrawingOrderCallback(mFanLayoutManager))
+
+        //LayoutManager的Item选中回调
+        mFanLayoutManager.addOnItemSelectedListener { position, _ ->
+            if (lastSelect != position) {
+                lastSelect = position
+                //mFanLayoutManager.switchItem(rvTemplate, position)
+            }
+        }
+
+        btnChange.setOnClickListener {
+            mFanLayoutManager.collapseViews()
+        }
+
+        //Item点击回调
+        adapter.setOnItemClickListener { itemPosition, clickView ->
+            if (lastSelect == itemPosition) {
+                onClick(clickView, itemPosition)
+            } else {
+                mFanLayoutManager.smoothScrollToPosition(rvTemplate, null, itemPosition)
+            }
+        }
     }
-  }
 
-  fun deselectIfSelected(): Boolean {
-    return if (mFanLayoutManager.isItemSelected) {
-      mFanLayoutManager.deselectItem()
-      true
-    } else false
-  }
+    private fun onClick(view: View, pos: Int) {
+        val fragment: DetailFragment = DetailFragment.newInstance(adapter.getModelByPos(pos))
+        fragment.sharedElementEnterTransition = SharedTransitionSet()
+        fragment.enterTransition = Fade()
+        exitTransition = Fade()
+        fragment.sharedElementReturnTransition = SharedTransitionSet()
 
-  companion object {
-
-    fun newInstance(): MainFragment {
-      val args = Bundle()
-      val fragment = MainFragment()
-      fragment.arguments = args
-      return fragment
+        activity?.apply {
+            supportFragmentManager
+                .beginTransaction()
+                .addSharedElement(view, "shared")
+                .replace(R.id.root, fragment)
+                .addToBackStack("home")
+                .commit()
+        }
     }
-  }
+
+    fun deselectIfSelected(): Boolean {
+        return if (mFanLayoutManager.isItemSelected) {
+            mFanLayoutManager.deselectItem()
+            true
+        } else false
+    }
+
+    companion object {
+
+        fun newInstance(): MainFragment {
+            val args = Bundle()
+            val fragment = MainFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 }

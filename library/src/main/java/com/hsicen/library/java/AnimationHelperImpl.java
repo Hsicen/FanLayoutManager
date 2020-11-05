@@ -25,16 +25,16 @@ class AnimationHelperImpl implements AnimationHelper {
   private static final float ANIMATION_VIEW_SCALE_FACTOR = 1f;
 
   // base duration for open animation
-  private static final int ANIMATION_SINGLE_OPEN_DURATION = 300;
+  private static final int ANIMATION_SINGLE_OPEN_DURATION = 0;
 
   // base duration for close animation
-  private static final int ANIMATION_SINGLE_CLOSE_DURATION = 300;
+  private static final int ANIMATION_SINGLE_CLOSE_DURATION = 0;
 
   // base duration for shift animation
-  private static final int ANIMATION_SHIFT_VIEWS_DURATION = 200;
+  private static final int ANIMATION_SHIFT_VIEWS_DURATION = 0;
 
   // base threshold duration for shift animation
-  private static final int ANIMATION_SHIFT_VIEWS_DELAY_THRESHOLD = 50;
+  private static final int ANIMATION_SHIFT_VIEWS_DELAY_THRESHOLD = 0;
 
   // base threshold duration for open/close animation (bounce effect)
   private static final float ANIMATION_VIEW_SCALE_FACTOR_THRESHOLD = 0F;
