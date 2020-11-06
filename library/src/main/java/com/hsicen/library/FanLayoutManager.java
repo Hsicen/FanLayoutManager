@@ -1,4 +1,4 @@
-package com.hsicen.library.java;
+package com.hsicen.library;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
@@ -12,9 +12,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hsicen.library.java.callbacks.ItemSelectedListener;
+import com.hsicen.library.callbacks.ItemSelectedListener;
 
 import java.util.Collection;
 import java.util.Random;
@@ -60,10 +61,6 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
      * LinearSmoothScroller for switch views.
      */
     private final FanCardScroller mFanCardScroller;
-    /**
-     * LinearSmoothScroller to show view in the middle of the screen.
-     */
-    private final ShiftToCenterCardScroller mShiftToCenterCardScroller;
 
     /**
      * Just random ))
@@ -140,6 +137,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
      */
     private View mCenterView = null;
     private ItemSelectedListener mSelectedListener = null;
+    private LinearSnapHelper snapHelper = new LinearSnapHelper();
 
     public FanLayoutManager(@NonNull Context context) {
         this(context, null);
@@ -163,8 +161,12 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
                 }
             }
         });
-        // create default smooth scroller to show item in the middle of the screen
-        mShiftToCenterCardScroller = new ShiftToCenterCardScroller(context);
+    }
+
+    @Override
+    public void onAttachedToWindow(RecyclerView view) {
+        super.onAttachedToWindow(view);
+        snapHelper.attachToRecyclerView(view);
     }
 
     public void addOnItemSelectedListener(ItemSelectedListener listener) {
@@ -864,27 +866,6 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
     }
 
     @Override
-    public void onScrollStateChanged(int state) {
-        super.onScrollStateChanged(state);
-        // when user stop scrolling
-        if (state == RecyclerView.SCROLL_STATE_IDLE) {
-            // show view in the middle of screen
-            scrollToCenter();
-        }
-    }
-
-    /*** 滑动到中心Item*/
-    private void scrollToCenter() {
-        View nearestToCenterView = findCurrentCenterView();
-        if (nearestToCenterView != null) {
-            // scroll to the nearest view
-            mShiftToCenterCardScroller.setTargetPosition(getPosition(nearestToCenterView));
-            startSmoothScroll(mShiftToCenterCardScroller);
-            mSelectedListener.onItemSelected(getPosition(nearestToCenterView), nearestToCenterView);
-        }
-    }
-
-    @Override
     public void scrollToPosition(int position) {
         mScrollToPosition = position;
         requestLayout();
@@ -1089,15 +1070,10 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
                     public void onAnimationEnd(Animator animator) {
                         // 3) Unlock screen
                         mIsViewCollapsing = !mIsViewCollapsing;
-                        // 4) Scroll to center nearest card
-                        scrollToCenter();
                     }
-                }, new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        // update rotation and translation for all views
-                        updateArcViewPositions();
-                    }
+                }, valueAnimator -> {
+                    // update rotation and translation for all views
+                    updateArcViewPositions();
                 });
     }
 

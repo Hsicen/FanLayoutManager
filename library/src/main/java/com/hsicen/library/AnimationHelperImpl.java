@@ -1,4 +1,4 @@
-package com.hsicen.library.java;
+package com.hsicen.library;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -8,6 +8,7 @@ import android.view.animation.DecelerateInterpolator;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.Collection;
 import org.jetbrains.annotations.NotNull;
 

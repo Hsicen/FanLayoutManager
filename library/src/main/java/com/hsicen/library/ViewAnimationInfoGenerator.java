@@ -1,8 +1,11 @@
-package com.hsicen.library.java;
+package com.hsicen.library;
 
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.hsicen.library.ViewAnimationInfo;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,10 +29,10 @@ class ViewAnimationInfoGenerator {
    * @return collection of view data
    */
   static Collection<ViewAnimationInfo> generate(int delta,
-      boolean isSelected,
-      @NonNull RecyclerView.LayoutManager layoutManager,
-      int centerViewPos,
-      boolean isCollapsed) {
+                                                boolean isSelected,
+                                                @NonNull RecyclerView.LayoutManager layoutManager,
+                                                int centerViewPos,
+                                                boolean isCollapsed) {
 
     final List<ViewAnimationInfo> infoViews = new ArrayList<>();
     if (centerViewPos == RecyclerView.NO_POSITION) {

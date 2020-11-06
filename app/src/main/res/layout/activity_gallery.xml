@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <com.hsicen.library.java.gallery.GalleryRecyclerView
+    <com.hsicen.library.gallery.GalleryRecyclerView
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
         android:layout_height="254dp"

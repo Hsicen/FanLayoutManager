@@ -1,4 +1,4 @@
-package com.hsicen.library.java.callbacks;
+package com.hsicen.library.callbacks;
 
 import android.view.View;
 
@@ -10,6 +10,6 @@ import android.view.View;
  */
 public interface ItemSelectedListener {
 
-  /*** 当前选中Item*/
-  void onItemSelected(int position, View selectedView);
+    /*** 当前选中Item*/
+    void onItemSelected(int position, View selectedView);
 }

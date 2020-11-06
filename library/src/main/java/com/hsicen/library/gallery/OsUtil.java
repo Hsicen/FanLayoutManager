@@ -1,4 +1,4 @@
-package com.hsicen.library.java.gallery;
+package com.hsicen.library.gallery;
 
 import android.app.Activity;
 import android.content.res.Resources;

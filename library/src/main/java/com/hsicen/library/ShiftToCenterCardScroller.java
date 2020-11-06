@@ -1,4 +1,4 @@
-package com.hsicen.library.java;
+package com.hsicen.library;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

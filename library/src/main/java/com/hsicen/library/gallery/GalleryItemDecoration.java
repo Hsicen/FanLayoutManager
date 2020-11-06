@@ -1,4 +1,4 @@
-package com.hsicen.library.java.gallery;
+package com.hsicen.library.gallery;
 
 import android.graphics.Rect;
 import android.view.View;

@@ -1,4 +1,4 @@
-package com.hsicen.library.java.callbacks;
+package com.hsicen.library.callbacks;
 
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;

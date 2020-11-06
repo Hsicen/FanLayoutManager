@@ -1,4 +1,4 @@
-package com.hsicen.library.java.gallery;
+package com.hsicen.library.gallery;
 
 import android.content.Context;
 import android.content.res.TypedArray;

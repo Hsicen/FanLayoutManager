@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.hsicen.fanlayoutmanager.model.SportCardsUtils
 import com.hsicen.fanlayoutmanager.transition.SharedTransitionSet
-import com.hsicen.library.java.FanLayoutManager
-import com.hsicen.library.java.FanLayoutManagerSettings
-import com.hsicen.library.java.callbacks.FanChildDrawingOrderCallback
+import com.hsicen.library.FanLayoutManager
+import com.hsicen.library.FanLayoutManagerSettings
+import com.hsicen.library.callbacks.FanChildDrawingOrderCallback
 import kotlinx.android.synthetic.main.fragment_main.*
 
 /**
@@ -27,7 +27,7 @@ class MainFragment : Fragment() {
         //设置默认配置
         val settings: FanLayoutManagerSettings = FanLayoutManagerSettings
             .newBuilder(requireActivity())
-            .withFanRadius(false)
+            .withFanRadius(true)
             .withViewHeightDp(212f)
             .withViewWidthDp(212f)
             .withItemMargin(34.dp2px)
