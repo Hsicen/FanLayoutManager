@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
  * 功能：
  * 描述：自定义RecyclerView， 设置抛掷速度
  */
-internal class CustomRecyclerView : RecyclerView {
+class CustomRecyclerView : RecyclerView {
     //设置抛掷因子
     var mScale = 0.2
 

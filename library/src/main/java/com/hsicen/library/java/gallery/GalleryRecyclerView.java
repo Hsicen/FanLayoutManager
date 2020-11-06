@@ -150,13 +150,15 @@ public class GalleryRecyclerView extends RecyclerView implements View.OnTouchLis
     /**
      * 设置页面参数，单位dp
      *
+     * @param itemWidth            item宽度
+     * @param itemHeight           item高度
      * @param pageMargin           默认：0dp
-     * @param leftPageVisibleWidth 默认：50dp
      * @return GalleryRecyclerView
      */
-    public GalleryRecyclerView initPageParams(int pageMargin, int leftPageVisibleWidth) {
+    public GalleryRecyclerView initPageParams(int itemWidth, int itemHeight, int pageMargin) {
+        mDecoration.mItemWidth = itemWidth;
+        mDecoration.mItemHeight = itemHeight;
         mDecoration.mPageMargin = pageMargin;
-        mDecoration.mLeftPageVisibleWidth = leftPageVisibleWidth;
         return this;
     }
 

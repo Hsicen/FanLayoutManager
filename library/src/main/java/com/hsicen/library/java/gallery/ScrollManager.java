@@ -59,8 +59,8 @@ public class ScrollManager {
     }
 
     public void updateConsume() {
-        mConsumeX += OsUtil.dpToPx(mGalleryRecyclerView.getDecoration().mLeftPageVisibleWidth + mGalleryRecyclerView.getDecoration().mPageMargin * 2);
-        mConsumeY += OsUtil.dpToPx(mGalleryRecyclerView.getDecoration().mLeftPageVisibleWidth + mGalleryRecyclerView.getDecoration().mPageMargin * 2);
+        mConsumeX += (mGalleryRecyclerView.getDecoration().mPageMargin * 2);
+        mConsumeY += (mGalleryRecyclerView.getDecoration().mPageMargin * 2);
     }
 
     class GalleryScrollerListener extends RecyclerView.OnScrollListener {

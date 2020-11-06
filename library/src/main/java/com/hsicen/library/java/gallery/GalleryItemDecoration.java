@@ -13,19 +13,16 @@ import org.jetbrains.annotations.NotNull;
  * 作者：hsicen  2020/11/5 17:57
  * 邮箱：codinghuang@163.com
  * 功能：
- * 描述：RV分割线定义
+ * 描述：item布局设置
  */
 public class GalleryItemDecoration extends RecyclerView.ItemDecoration {
     private final String TAG = "MainActivity_TAG";
 
-    /**
-     * 每一个页面默认页边距
-     */
+    //默认px值
+    /*** 每一个页面默认页边距*/
     public int mPageMargin = 0;
-    /**
-     * 中间页面左右两边的页面可见部分宽度
-     */
-    public int mLeftPageVisibleWidth = 50;
+    public int mItemWidth = OsUtil.getScreenWidth() * 7 / 10;
+    public int mItemHeight = mItemWidth;
 
     public int mItemConsumeY = 0;
     public int mItemConsumeX = 0;
@@ -61,24 +58,24 @@ public class GalleryItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private void onSetVerticalParams(ViewGroup parent, View itemView, int position, int itemCount) {
-        int itemNewWidth = parent.getWidth();
-        int itemNewHeight = parent.getHeight() - OsUtil.dpToPx(4 * mPageMargin + 2 * mLeftPageVisibleWidth);
+        int itemNewWidth = mItemWidth;
+        int itemNewHeight = mItemHeight;
 
-        mItemConsumeY = itemNewHeight + OsUtil.dpToPx(2 * mPageMargin);
+        mItemConsumeY = itemNewHeight + (2 * mPageMargin);
 
         if (mOnItemSizeMeasuredListener != null) {
             mOnItemSizeMeasuredListener.onItemSizeMeasured(mItemConsumeY);
         }
 
         // 适配第0页和最后一页没有左页面和右页面，让他们保持左边距和右边距和其他项一样
-        int topMargin = position == 0 ? OsUtil.dpToPx(mLeftPageVisibleWidth + 2 * mPageMargin) : OsUtil.dpToPx(mPageMargin);
-        int bottomMargin = position == itemCount - 1 ? OsUtil.dpToPx(mLeftPageVisibleWidth + 2 * mPageMargin) : OsUtil.dpToPx(mPageMargin);
+        int topMargin = position == 0 ? (OsUtil.getScreenHeigth() - mItemWidth) / 2 : (mPageMargin);
+        int bottomMargin = position == itemCount - 1 ? (OsUtil.getScreenHeigth() - mItemWidth) / 2 : (mPageMargin);
 
         setLayoutParams(itemView, 0, topMargin, 0, bottomMargin, itemNewWidth, itemNewHeight);
     }
 
     /**
-     * 设置水平滚动的参数
+     * 设置Item的宽高和间隔参数
      *
      * @param parent    ViewGroup
      * @param itemView  View
@@ -86,18 +83,18 @@ public class GalleryItemDecoration extends RecyclerView.ItemDecoration {
      * @param itemCount int
      */
     private void onSetHorizontalParams(ViewGroup parent, View itemView, int position, int itemCount) {
-        int itemNewWidth = parent.getWidth() - OsUtil.dpToPx(4 * mPageMargin + 2 * mLeftPageVisibleWidth);
-        int itemNewHeight = parent.getHeight();
+        int itemNewWidth = mItemWidth;
+        int itemNewHeight = mItemHeight;
 
-        mItemConsumeX = itemNewWidth + OsUtil.dpToPx(2 * mPageMargin);
+        mItemConsumeX = itemNewWidth + (2 * mPageMargin);
 
         if (mOnItemSizeMeasuredListener != null) {
             mOnItemSizeMeasuredListener.onItemSizeMeasured(mItemConsumeX);
         }
 
         // 适配第0页和最后一页没有左页面和右页面，让他们保持左边距和右边距和其他项一样
-        int leftMargin = position == 0 ? OsUtil.dpToPx(mLeftPageVisibleWidth + 2 * mPageMargin) : OsUtil.dpToPx(mPageMargin);
-        int rightMargin = position == itemCount - 1 ? OsUtil.dpToPx(mLeftPageVisibleWidth + 2 * mPageMargin) : OsUtil.dpToPx(mPageMargin);
+        int leftMargin = position == 0 ? (OsUtil.getScreenWidth() - mItemWidth) / 2 : (mPageMargin);
+        int rightMargin = position == itemCount - 1 ? (OsUtil.getScreenWidth() - mItemWidth) / 2 : (mPageMargin);
 
         setLayoutParams(itemView, leftMargin, 0, rightMargin, 0, itemNewWidth, itemNewHeight);
     }
