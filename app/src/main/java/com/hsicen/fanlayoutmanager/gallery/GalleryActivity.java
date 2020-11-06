@@ -1,7 +1,11 @@
 package com.hsicen.fanlayoutmanager.gallery;
 
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -109,7 +113,7 @@ public class GalleryActivity extends AppCompatActivity implements GalleryRecycle
 
     /*** 设置背景高斯模糊*/
     public void setBlurImage(boolean forceUpdate) {
-        /*RecyclerAdapter adapter = (RecyclerAdapter) mRecyclerView.getAdapter();
+        RecyclerAdapter adapter = (RecyclerAdapter) mRecyclerView.getAdapter();
         final int mCurViewPosition = mRecyclerView.getScrolledPosition();
 
         boolean isSamePosAndNotUpdate = (mCurViewPosition == mLastDraPosition) && !forceUpdate;
@@ -121,10 +125,6 @@ public class GalleryActivity extends AppCompatActivity implements GalleryRecycle
             @Override
             public void run() {
                 //如果是Fragment的话，需要判断Fragment是否Attach当前Activity，否则getResource会报错
-                *//*if (!isAdded()) {
-                    // fix fragment not attached to Activity
-                    return;
-                }*//*
                 // 获取当前位置的图片资源ID
                 int resourceId = ((RecyclerAdapter) mRecyclerView.getAdapter()).getResId(mCurViewPosition);
                 // 将该资源图片转为Bitmap
@@ -136,7 +136,7 @@ public class GalleryActivity extends AppCompatActivity implements GalleryRecycle
                 // 获取前一页的Drawable
                 Drawable preBlurDrawable = mTSDraCacheMap.get(KEY_PRE_DRAW) == null ? resBlurDrawable : mTSDraCacheMap.get(KEY_PRE_DRAW);
 
-                *//* 以下为淡入淡出效果 *//*
+                //以下为淡入淡出效果
                 Drawable[] drawableArr = {preBlurDrawable, resBlurDrawable};
                 TransitionDrawable transitionDrawable = new TransitionDrawable(drawableArr);
                 mContainer.setBackgroundDrawable(transitionDrawable);
@@ -147,7 +147,7 @@ public class GalleryActivity extends AppCompatActivity implements GalleryRecycle
                 // 记录上一次高斯模糊的位置
                 mLastDraPosition = mCurViewPosition;
             }
-        });*/
+        });
     }
 
     /***

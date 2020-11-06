@@ -71,12 +71,6 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
     private final Random mRandom = new Random();
 
     /**
-     * Map with view (card) rotations. This need to save bounce rotations for views.
-     * {@link #updateArcViewPositions}
-     */
-    private SparseArray<Float> mViewRotationsMap = new SparseArray<>();
-
-    /**
      * Helper module need to implement 'open','close', 'shift' views functionality.
      * By default using {@link AnimationHelperImpl}
      * Can be changed {@link #setAnimationHelper(AnimationHelper)}
@@ -185,8 +179,6 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
         mPendingSavedState.isSelected = mIsSelected;
         // save collapsed state for views
         mPendingSavedState.isCollapsed = mIsCollapsed;
-        // center view position
-        mPendingSavedState.mRotation = mViewRotationsMap;
     }
 
     @Override
@@ -207,8 +199,6 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
             mIsSelected = mPendingSavedState.isSelected;
             // collapsed state
             mIsCollapsed = mPendingSavedState.isCollapsed;
-            // rotation state
-            mViewRotationsMap = mPendingSavedState.mRotation;
         }
     }
 
@@ -498,21 +488,8 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
             }
 
             viewPosition = getPosition(view);
-            Float baseViewRotation = mViewRotationsMap.get(viewPosition);
-
-            if (baseViewRotation == null) {
-                // generate base (bounce) rotation for view.
-                baseViewRotation = generateBaseViewRotation();
-                mViewRotationsMap.put(viewPosition, baseViewRotation);
-            }
-
-            view.setRotation((float) (rotation + (mSelectedItemPosition == viewPosition && mIsSelectedItemStraightened ?
-                    0 : baseViewRotation)));
+            view.setRotation((float) (rotation + (mSelectedItemPosition == viewPosition && mIsSelectedItemStraightened ? 0 : 0)));
         }
-    }
-
-    private float generateBaseViewRotation() {
-        return mRandom.nextFloat() * mSettings.getAngleItemBounce() * 2 - mSettings.getAngleItemBounce();
     }
 
     /**
@@ -896,9 +873,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
         }
     }
 
-    /**
-     * Scroll views left or right so nearest view will be in the middle of screen
-     */
+    /*** 滑动到中心Item*/
     private void scrollToCenter() {
         View nearestToCenterView = findCurrentCenterView();
         if (nearestToCenterView != null) {
@@ -1024,20 +999,12 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
             }
         }
 
-        Float baseViewRotation = mViewRotationsMap.get(mSelectedItemPosition);
-
-        if (baseViewRotation == null) {
-            // generate base (bounce) rotation for view.
-            baseViewRotation = generateBaseViewRotation();
-            mViewRotationsMap.put(mSelectedItemPosition, baseViewRotation);
-        }
-
         if (viewToRotate != null) {
             // save state
             mIsSelectedItemStraightenedInProcess = true;
 
             // start straight animation
-            mAnimationHelper.rotateView(viewToRotate, baseViewRotation, new Animator.AnimatorListener() {
+            mAnimationHelper.rotateView(viewToRotate, 0, new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
                     if (listener != null) {

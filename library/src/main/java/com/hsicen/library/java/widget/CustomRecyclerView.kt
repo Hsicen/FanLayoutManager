@@ -2,6 +2,7 @@ package com.hsicen.library.java.widget
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -11,17 +12,32 @@ import androidx.recyclerview.widget.RecyclerView
  * 描述：自定义RecyclerView， 设置抛掷速度
  */
 class CustomRecyclerView : RecyclerView {
-    //设置抛掷因子
-    var mScale = 0.2
+    //设置滑动速度（像素/s）
+    var flySpeed = 4500
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
             : super(context, attrs, defStyleAttr)
 
-    override fun fling(velocityX: Int, velocityY: Int): Boolean {
-        val newX = (velocityX * mScale).toInt()
-        return super.fling(newX, velocityY)
+    init {
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(this)
     }
 
+    override fun fling(velocityX: Int, velocityY: Int): Boolean {
+        val newX = balanceVelocity(velocityX)
+        val newY = balanceVelocity(velocityY)
+
+        return super.fling(newX, newY)
+    }
+
+    /*** 返回滑动速度值*/
+    private fun balanceVelocity(velocity: Int): Int {
+        return if (velocity > 0) {
+            velocity.coerceAtMost(flySpeed)
+        } else {
+            velocity.coerceAtLeast(-flySpeed)
+        }
+    }
 }

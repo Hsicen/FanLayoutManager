@@ -21,8 +21,8 @@ public class GalleryItemDecoration extends RecyclerView.ItemDecoration {
     //默认px值
     /*** 每一个页面默认页边距*/
     public int mPageMargin = 0;
-    public int mItemWidth = OsUtil.getScreenWidth() * 7 / 10;
-    public int mItemHeight = mItemWidth;
+    public int mItemWidth = 0;
+    public int mItemHeight = 0;
 
     public int mItemConsumeY = 0;
     public int mItemConsumeX = 0;

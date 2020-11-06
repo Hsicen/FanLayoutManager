@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * @version 1.0
  */
 class ShiftToCenterCardScroller extends BaseSmoothScroller {
-    private static final float MILLISECONDS_PER_INCH = 100F;
+    private static final float MILLISECONDS_PER_INCH = 80F;
 
     ShiftToCenterCardScroller(Context context) {
         super(context);
