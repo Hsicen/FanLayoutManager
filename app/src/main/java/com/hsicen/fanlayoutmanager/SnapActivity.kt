@@ -85,7 +85,7 @@ class SnapActivity : AppCompatActivity() {
 
             /*** 数据绑定*/
             fun bindTo(position: Int) {
-                ivTemplate.setImageResource(R.drawable.beauty7)
+                ivTemplate.setImageResource(R.drawable.beauty8)
                 tvIndex.text = "$position"
             }
         }

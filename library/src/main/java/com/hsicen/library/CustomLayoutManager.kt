@@ -1,6 +1,7 @@
 package com.hsicen.library
 
 import android.content.Context
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,15 +43,6 @@ class CustomLayoutManager @JvmOverloads constructor(
     override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State?) {
         super.onLayoutChildren(recycler, state)
 
-        updateArcViewPositions()
-    }
-
-    override fun onMeasure(
-        recycler: RecyclerView.Recycler,
-        state: RecyclerView.State,
-        widthSpec: Int, heightSpec: Int
-    ) {
-        super.onMeasure(recycler, state, widthSpec, heightSpec)
         updateArcViewPositions()
     }
 
@@ -114,6 +106,7 @@ class CustomLayoutManager @JvmOverloads constructor(
 
                 itemView.translationY = deltaY
                 rotation = (Math.toDegrees(asin((radius - deltaY) / radius)) - 90) * sign(deltaX)
+                Log.d("hsc", "位置：$pos  deltaY:$deltaY  rotation:$rotation")
             }
 
             //设置偏移
