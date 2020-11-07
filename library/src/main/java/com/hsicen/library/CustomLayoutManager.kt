@@ -23,8 +23,14 @@ class CustomLayoutManager @JvmOverloads constructor(
 ) : LinearLayoutManager(context, orientation, reverseLayout) {
     private val snapHelper = GravitySnapHelper(Gravity.CENTER)
     var isEnableFan = true //是否启用弧形布局
+
     var itemWidthPx = 0  //item的宽度
     var itemHeightPx = 0 //item的高度
+    var itemMarginPx = 0 //item之间的间距
+    var itemStartMarginPx = 0 //item刚开始的间距
+
+    //当前选中Item回调
+    private var onItemChange: ((position: Int) -> Unit)? = null
 
     override fun onAttachedToWindow(view: RecyclerView?) {
         super.onAttachedToWindow(view)
@@ -64,7 +70,7 @@ class CustomLayoutManager @JvmOverloads constructor(
         if (state == RecyclerView.SCROLL_STATE_IDLE) {
             //获取当前View的位置
             val position = getCenterIndex()
-            //Toast.makeText(context, "当前选中： $position", Toast.LENGTH_SHORT).show()
+            onItemChange?.invoke(position)
         }
     }
 
@@ -129,4 +135,25 @@ class CustomLayoutManager @JvmOverloads constructor(
         val centerView = findCurrentCenterView() ?: return 0
         return getPosition(centerView)
     }
+
+    /*** 当前选中Item回调*/
+    fun onItemChange(onItemChange: ((position: Int) -> Unit)): CustomLayoutManager {
+        this.onItemChange = onItemChange
+        return this
+    }
+
+    /*** 设置Item的宽高参数和间距*/
+    fun setItemInfo(widthPx: Int, heightPx: Int, marginPx: Int): CustomLayoutManager {
+        itemWidthPx = widthPx
+        itemHeightPx = heightPx
+        itemMarginPx = marginPx
+        return this
+    }
+
+    /*** 是否使用弧形布局*/
+    fun enableFan(isFan: Boolean): CustomLayoutManager {
+        isEnableFan = isFan
+        return this
+    }
+
 }

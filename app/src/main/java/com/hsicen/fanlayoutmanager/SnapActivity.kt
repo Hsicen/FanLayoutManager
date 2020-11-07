@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -33,7 +34,12 @@ class SnapActivity : AppCompatActivity() {
 
     private fun initView() {
         val customLayoutManager = CustomLayoutManager(this)
-        customLayoutManager.itemWidthPx = 212.dp2px
+            .enableFan(false)
+            .setItemInfo(212.dp2px, 212.dp2px, 16.dp2px)
+            .onItemChange {
+                Toast.makeText(this, "当前选中： $it", Toast.LENGTH_SHORT).show()
+            }
+
         rvGallery.layoutManager = customLayoutManager
         val snapAdapter = SnapAdapter()
         rvGallery.adapter = snapAdapter
@@ -59,7 +65,7 @@ class SnapActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: SnapViewHolder, position: Int) {
-            holder.bindTo()
+            holder.bindTo(position)
 
             curPosition = position
             holder.itemView.setOnClickListener {
@@ -69,13 +75,14 @@ class SnapActivity : AppCompatActivity() {
 
         override fun getItemCount() = 30
 
-
         inner class SnapViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val ivTemplate: ImageView = itemView.findViewById(R.id.iv_photo)
+            val tvIndex: TextView = itemView.findViewById(R.id.tvIndex)
 
             /*** 数据绑定*/
-            fun bindTo() {
+            fun bindTo(position: Int) {
                 ivTemplate.setImageResource(R.drawable.beauty7)
+                tvIndex.text = "$position"
             }
         }
     }
