@@ -77,9 +77,9 @@ class CustomLayoutManager @JvmOverloads constructor(
     /*** 设置View旋转角度逻辑 */
     private fun updateArcViewPositions() {
         val halfWidth = width / 2f
-        val radius = width * 2.5
+        val radius = width * 2.0
         val powRadius = radius * radius
-        val offset = (screenWidth() - itemWidthPx) / 2
+        val centerOffset = (screenWidth() - itemWidthPx) / 2
 
         val centerIndex = getCenterIndex()
         for (pos in 0 until childCount) {
@@ -94,8 +94,8 @@ class CustomLayoutManager @JvmOverloads constructor(
             //设置偏移角度
             if (isEnableFan) {
                 var decoratedLeft = getDecoratedLeft(itemView)
-                if (0 == centerIndex && centerIndex == pos) {
-                    decoratedLeft = offset
+                if (pos == 0 && centerIndex in 0..1) {
+                    decoratedLeft += itemStartMarginPx
                 }
 
                 val deltaX = halfWidth - decoratedLeft - halfViewWidth
@@ -150,10 +150,19 @@ class CustomLayoutManager @JvmOverloads constructor(
         return this
     }
 
+    /*** 设置开始的间距*/
+    fun setStartMargin(sizePx: Int): CustomLayoutManager {
+        itemStartMarginPx = sizePx
+        return this
+    }
+
     /*** 是否使用弧形布局*/
     fun enableFan(isFan: Boolean): CustomLayoutManager {
         isEnableFan = isFan
         return this
     }
+
+    /*** 返回当前SnapHelper*/
+    fun getSnapHelper() = snapHelper
 
 }

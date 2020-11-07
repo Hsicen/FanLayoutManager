@@ -34,8 +34,9 @@ class SnapActivity : AppCompatActivity() {
 
     private fun initView() {
         val customLayoutManager = CustomLayoutManager(this)
-            .enableFan(false)
+            .enableFan(true)
             .setItemInfo(212.dp2px, 212.dp2px, 16.dp2px)
+            .setStartMargin((screenWidth() - 212.dp2px) / 2)
             .onItemChange {
                 Toast.makeText(this, "当前选中： $it", Toast.LENGTH_SHORT).show()
             }
@@ -73,11 +74,11 @@ class SnapActivity : AppCompatActivity() {
             }
         }
 
-        override fun getItemCount() = 30
+        override fun getItemCount() = 10
 
         inner class SnapViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val ivTemplate: ImageView = itemView.findViewById(R.id.iv_photo)
-            val tvIndex: TextView = itemView.findViewById(R.id.tvIndex)
+            private val ivTemplate: ImageView = itemView.findViewById(R.id.iv_photo)
+            private val tvIndex: TextView = itemView.findViewById(R.id.tvIndex)
 
             /*** 数据绑定*/
             fun bindTo(position: Int) {
