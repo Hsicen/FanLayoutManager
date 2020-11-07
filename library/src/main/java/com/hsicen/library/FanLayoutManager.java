@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hsicen.library.callbacks.ItemSelectedListener;
 
 import java.util.Collection;
-import java.util.Random;
 
 /**
  * Custom implementation of {@link RecyclerView.LayoutManager}
@@ -61,11 +61,6 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
      * LinearSmoothScroller for switch views.
      */
     private final FanCardScroller mFanCardScroller;
-
-    /**
-     * Just random ))
-     */
-    private final Random mRandom = new Random();
 
     /**
      * Helper module need to implement 'open','close', 'shift' views functionality.
@@ -332,31 +327,23 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
 
     @Override
     public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler, RecyclerView.State state) {
-        // after fillRightFromCenter(...) we don't need this param.
         mScrollToPosition = RecyclerView.NO_POSITION;
-        //        // after fillRightFromCenter(...) we don't need this param.
         mPendingSavedState = null;
+        Log.d("hsc", "滑动距离：" + dx);
 
         if (dx == RecyclerView.NO_POSITION) {
             int delta = scrollHorizontallyInternal(dx);
-            offsetChildrenHorizontal(-delta);
+            Log.d("hsc", "纠正的滑动距离：" + delta);
+            offsetChildrenHorizontal(-dx);
             fill(recycler, false);
-            return delta;
+            return dx;
         }
 
-        if (mSelectedItemPosition != RecyclerView.NO_POSITION && !mIsSelectAnimationInProcess && !mIsDeselectAnimationInProcess &&
-                !mIsWaitingToDeselectAnimation && !mIsWaitingToSelectAnimation) {
-            // if item selected and any animation isn't in progress
-            deselectItem(mSelectedItemPosition);
-        }
-        // if animation in progress block scroll
-        if (mIsDeselectAnimationInProcess || mIsSelectAnimationInProcess || mIsViewCollapsing) {
-            return 0;
-        }
         int delta = scrollHorizontallyInternal(dx);
-        offsetChildrenHorizontal(-delta);
+        Log.d("hsc", "纠正的滑动距离：" + delta);
+        offsetChildrenHorizontal(-dx);
         fill(recycler, true);
-        return delta;
+        return dx;
     }
 
     @Override
@@ -374,12 +361,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
         super.onMeasure(recycler, state, widthSpec, heightSpec);
     }
 
-    /**
-     * Calculate delta x for views.
-     *
-     * @param dx fling (user scroll gesture) delta x
-     * @return delta x for views
-     */
+    /*** 计算每次滑动的距离*/
     private int scrollHorizontallyInternal(int dx) {
         int childCount = getChildCount();
         // check child count
@@ -1022,9 +1004,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
         }
     }
 
-    /**
-     * Method collapsed views (cards).
-     */
+    /*** 折叠Item*/
     public void collapseViews() {
         // check all animations
         if (mIsSelectAnimationInProcess || mIsWaitingToSelectAnimation ||
@@ -1045,11 +1025,8 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
         updateItemsByMode();
     }
 
-    /**
-     * Method collapsing all views
-     */
+    /*** 折叠Item*/
     private void updateItemsByMode() {
-
         // collapse distance
         int delta = mSettings.getViewWidthPx() / 2;
 
@@ -1077,11 +1054,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
                 });
     }
 
-    /**
-     * Find view in the middle of screen
-     *
-     * @return center View
-     */
+    /*** 找到当前的中心Item*/
     @Nullable
     private View findCurrentCenterView() {
         // +++++ prepare data +++++

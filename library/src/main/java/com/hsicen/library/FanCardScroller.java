@@ -19,11 +19,6 @@ class FanCardScroller extends BaseSmoothScroller {
     @Nullable
     private FanCardTimeCallback mCardTimeCallback;
 
-    /**
-     * LinearSmoothScroller for switch views.
-     *
-     * @param context Context
-     */
     FanCardScroller(Context context) {
         super(context);
     }

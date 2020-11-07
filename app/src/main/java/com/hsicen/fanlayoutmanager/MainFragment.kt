@@ -2,11 +2,13 @@ package com.hsicen.fanlayoutmanager
 
 import android.os.Bundle
 import android.transition.Fade
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.RecyclerView
 import com.hsicen.fanlayoutmanager.model.SportCardsUtils
 import com.hsicen.fanlayoutmanager.transition.SharedTransitionSet
 import com.hsicen.library.FanLayoutManager
@@ -27,7 +29,7 @@ class MainFragment : Fragment() {
         //设置默认配置
         val settings: FanLayoutManagerSettings = FanLayoutManagerSettings
             .newBuilder(requireActivity())
-            .withFanRadius(true)
+            .withFanRadius(false)
             .withViewHeightDp(212f)
             .withViewWidthDp(212f)
             .withItemMargin(34.dp2px)
@@ -66,6 +68,13 @@ class MainFragment : Fragment() {
                 //mFanLayoutManager.switchItem(rvTemplate, position)
             }
         }
+
+        rvTemplate.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                Log.d("hsc", "监听滑动距离：$dx")
+            }
+        })
 
         btnChange.setOnClickListener {
             mFanLayoutManager.collapseViews()
