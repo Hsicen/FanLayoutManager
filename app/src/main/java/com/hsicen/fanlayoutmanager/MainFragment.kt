@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
@@ -65,7 +66,7 @@ class MainFragment : Fragment() {
         mFanLayoutManager.addOnItemSelectedListener { position, _ ->
             if (lastSelect != position) {
                 lastSelect = position
-                //mFanLayoutManager.switchItem(rvTemplate, position)
+                Toast.makeText(activity, "当前选中：$position", Toast.LENGTH_SHORT).show()
             }
         }
 
