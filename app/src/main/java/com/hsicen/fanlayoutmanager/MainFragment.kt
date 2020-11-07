@@ -30,7 +30,7 @@ class MainFragment : Fragment() {
         //设置默认配置
         val settings: FanLayoutManagerSettings = FanLayoutManagerSettings
             .newBuilder(requireActivity())
-            .withFanRadius(false)
+            .withFanRadius(true)
             .withViewHeightDp(212f)
             .withViewWidthDp(212f)
             .withItemMargin(34.dp2px)

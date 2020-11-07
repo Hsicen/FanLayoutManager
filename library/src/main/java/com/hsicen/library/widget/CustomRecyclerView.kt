@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
  */
 class CustomRecyclerView : RecyclerView {
     //设置滑动速度（像素/s）
-    var flySpeed = 5000
+    var flySpeed = 6000
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
