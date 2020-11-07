@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.hsicen.library.widget
+package com.hsicen.library
 
 import android.content.Context
 import android.content.res.Resources

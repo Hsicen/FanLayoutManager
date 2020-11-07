@@ -8,10 +8,10 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.hsicen.library.widget.CustomLayoutManager
-import com.hsicen.library.widget.LinearEdgeDecoration
-import com.hsicen.library.widget.dp2px
-import com.hsicen.library.widget.screenWidth
+import com.hsicen.library.CustomLayoutManager
+import com.hsicen.library.LinearEdgeDecoration
+import com.hsicen.library.dp2px
+import com.hsicen.library.screenWidth
 import kotlinx.android.synthetic.main.activity_gallery.*
 
 /**

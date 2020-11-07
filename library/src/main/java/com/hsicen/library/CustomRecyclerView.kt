@@ -1,4 +1,4 @@
-package com.hsicen.library.widget
+package com.hsicen.library
 
 import android.content.Context
 import android.util.AttributeSet

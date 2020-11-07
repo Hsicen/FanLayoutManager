@@ -1,4 +1,4 @@
-package com.hsicen.library.widget
+package com.hsicen.library
 
 import android.graphics.Rect
 import android.view.View

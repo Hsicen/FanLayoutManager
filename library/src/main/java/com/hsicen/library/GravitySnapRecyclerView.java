@@ -10,6 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hsicen.library.GravitySnapHelper;
+import com.hsicen.library.OrientationAwareRecyclerView;
+import com.hsicen.library.R;
+
 /**
  * 作者：hsicen  2020/11/7 14:43
  * 邮箱：codinghuang@163.com
