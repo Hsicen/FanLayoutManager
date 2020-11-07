@@ -1,4 +1,4 @@
-package com.hsicen.library.helper;
+package com.hsicen.library;
 
 import android.util.DisplayMetrics;
 import android.view.Gravity;

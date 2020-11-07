@@ -5,7 +5,7 @@ import android.view.Gravity
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.hsicen.library.helper.GravitySnapHelper
+import com.hsicen.library.GravitySnapHelper
 import kotlin.math.abs
 import kotlin.math.asin
 import kotlin.math.sign

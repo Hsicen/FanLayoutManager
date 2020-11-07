@@ -1,4 +1,4 @@
-package com.hsicen.library.helper;
+package com.hsicen.library;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,8 +9,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.hsicen.library.R;
 
 /**
  * 作者：hsicen  2020/11/7 14:43
