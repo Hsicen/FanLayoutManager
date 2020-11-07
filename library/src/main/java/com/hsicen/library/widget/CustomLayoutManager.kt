@@ -1,7 +1,6 @@
 package com.hsicen.library.widget
 
 import android.content.Context
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,8 +43,8 @@ class CustomLayoutManager @JvmOverloads constructor(
         state: RecyclerView.State,
         widthSpec: Int, heightSpec: Int
     ) {
-        updateArcViewPositions()
         super.onMeasure(recycler, state, widthSpec, heightSpec)
+        updateArcViewPositions()
     }
 
     override fun canScrollHorizontally(): Boolean = true
@@ -72,9 +71,10 @@ class CustomLayoutManager @JvmOverloads constructor(
 
     /*** 设置View旋转角度逻辑 */
     private fun updateArcViewPositions() {
-        val halfWidth = width / 2.toFloat()
-        val radius = width * 2.toDouble()
+        val halfWidth = width / 2f
+        val radius = width * 2.5
         val powRadius = radius * radius
+        val offset = (screenWidth() - itemWidthPx) / 2
 
         val centerIndex = getCenterIndex()
         for (pos in 0 until childCount) {
@@ -85,7 +85,6 @@ class CustomLayoutManager @JvmOverloads constructor(
             //设置偏移间距
             itemView.pivotX = halfViewWidth
             itemView.pivotY = itemView.height.toFloat()
-            val offset = (screenWidth() - itemWidthPx) / 2
 
             //设置偏移角度
             if (isEnableFan) {
@@ -94,22 +93,10 @@ class CustomLayoutManager @JvmOverloads constructor(
                     decoratedLeft = offset
                 }
 
-                var deltaX = halfWidth - decoratedLeft - halfViewWidth
-                var deltaY = (radius - sqrt(powRadius - deltaX * deltaX)).toFloat()
-                if (centerIndex == pos) {
-                    deltaX = 0f
-                    deltaY = 0f
-                }
+                val deltaX = halfWidth - decoratedLeft - halfViewWidth
+                val deltaY = (radius - sqrt(powRadius - deltaX * deltaX)).toFloat()
 
                 itemView.translationY = deltaY
-
-                Log.d(
-                    "hsc",
-                    "" +
-                            "位置:$pos  " +
-                            "deltaX:$deltaX  " +
-                            "deLeft:${getDecoratedLeft(itemView)}  "
-                )
                 rotation = (Math.toDegrees(asin((radius - deltaY) / radius)) - 90) * sign(deltaX)
             }
 

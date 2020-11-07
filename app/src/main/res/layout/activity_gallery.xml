@@ -11,9 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="@color/colorAccent"
-        android:clipToPadding="false"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
         tools:itemCount="2"
         tools:listitem="@layout/item_gallery" />
 

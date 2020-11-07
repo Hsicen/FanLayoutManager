@@ -33,7 +33,7 @@ class MainFragment : Fragment() {
             .withFanRadius(true)
             .withViewHeightDp(212f)
             .withViewWidthDp(212f)
-            .withItemMargin(34.dp2px)
+            .withItemMargin(17.dp2px)
             .withTopMargin(16.dp2px)
             .withBottomMargin(16.dp2px)
             .build()
