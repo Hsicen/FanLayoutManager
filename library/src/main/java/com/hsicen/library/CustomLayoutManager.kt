@@ -5,6 +5,7 @@ import android.view.Gravity
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.hsicen.library.scroller.FanCardScroller
 import kotlin.math.abs
 import kotlin.math.asin
 import kotlin.math.sign
@@ -22,6 +23,7 @@ class CustomLayoutManager @JvmOverloads constructor(
     reverseLayout: Boolean = false
 ) : LinearLayoutManager(context, orientation, reverseLayout) {
     private val snapHelper = GravitySnapHelper(Gravity.CENTER)
+    private val mFanCardScroller = FanCardScroller(context)
     var isEnableFan = true //是否启用弧形布局
 
     var itemWidthPx = 0  //item的宽度
@@ -72,6 +74,15 @@ class CustomLayoutManager @JvmOverloads constructor(
             val position = getCenterIndex()
             onItemChange?.invoke(position)
         }
+    }
+
+    override fun smoothScrollToPosition(
+        recyclerView: RecyclerView?,
+        state: RecyclerView.State?, position: Int
+    ) {
+        if (position >= itemCount) return
+        mFanCardScroller.targetPosition = position
+        startSmoothScroll(mFanCardScroller)
     }
 
     /*** 设置View旋转角度逻辑 */

@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_gallery.*
  * 描述：FanLayoutManager
  */
 class SnapActivity : AppCompatActivity() {
-    private var curPosition = -1
+    private var curPosition = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +34,11 @@ class SnapActivity : AppCompatActivity() {
 
     private fun initView() {
         val customLayoutManager = CustomLayoutManager(this)
-            .enableFan(true)
+            .enableFan(false)
             .setItemInfo(212.dp2px, 212.dp2px, 16.dp2px)
             .setStartMargin((screenWidth() - 212.dp2px) / 2)
             .onItemChange {
+                curPosition = it
                 Toast.makeText(this, "当前选中： $it", Toast.LENGTH_SHORT).show()
             }
 
@@ -68,9 +69,11 @@ class SnapActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: SnapViewHolder, position: Int) {
             holder.bindTo(position)
 
-            curPosition = position
             holder.itemView.setOnClickListener {
-                Toast.makeText(this@SnapActivity, "当前点击： $position", Toast.LENGTH_SHORT).show()
+                if (position != curPosition) {
+                    curPosition = position
+                    rvGallery.smoothScrollToPosition(curPosition)
+                }
             }
         }
 
