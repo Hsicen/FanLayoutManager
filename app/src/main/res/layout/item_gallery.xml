@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/iv_photo"
-        android:layout_width="212dp"
-        android:layout_height="212dp"
+        android:layout_width="254dp"
+        android:layout_height="254dp"
         android:background="@drawable/beauty1"
         android:scaleType="centerCrop"
         tools:ignore="ContentDescription" />
@@ -23,5 +23,11 @@
         android:textColor="@color/colorAccent"
         android:textSize="50sp"
         tools:text="9" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="254dp"
+        android:layout_gravity="center"
+        android:background="@color/white" />
 
 </androidx.cardview.widget.CardView>

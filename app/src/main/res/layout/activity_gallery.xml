@@ -5,6 +5,12 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white" />
+
     <com.hsicen.library.CustomRecyclerView
         android:id="@+id/rvGallery"
         android:layout_width="wrap_content"

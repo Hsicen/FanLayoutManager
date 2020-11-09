@@ -1,7 +1,6 @@
 package com.hsicen.library
 
 import android.content.Context
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -82,7 +81,6 @@ class CustomLayoutManager @JvmOverloads constructor(
         val halfWidth = width / 2f
         val radius = width * 2.0
         val powRadius = radius * radius
-        val centerOffset = (screenWidth() - itemWidthPx) / 2
 
         val centerIndex = getCenterIndex()
         for (pos in 0 until childCount) {
@@ -106,7 +104,6 @@ class CustomLayoutManager @JvmOverloads constructor(
 
                 itemView.translationY = deltaY
                 rotation = (Math.toDegrees(asin((radius - deltaY) / radius)) - 90) * sign(deltaX)
-                Log.d("hsc", "位置：$pos  deltaY:$deltaY  rotation:$rotation")
             }
 
             //设置偏移

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.hsicen.library.CustomLayoutManager
@@ -35,11 +34,11 @@ class SnapActivity : AppCompatActivity() {
     private fun initView() {
         val customLayoutManager = CustomLayoutManager(this)
             .enableFan(false)
-            .setItemInfo(212.dp2px, 212.dp2px, 16.dp2px)
-            .setStartMargin((screenWidth() - 212.dp2px) / 2)
+            .setItemInfo(254.dp2px, 254.dp2px, 34.dp2px)
+            .setStartMargin((screenWidth() - 254.dp2px) / 2)
             .onItemChange {
                 curPosition = it
-                Toast.makeText(this, "当前选中： $it", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "当前选中： $it", Toast.LENGTH_SHORT).show()
             }
 
         rvGallery.layoutManager = customLayoutManager
@@ -48,9 +47,9 @@ class SnapActivity : AppCompatActivity() {
 
         rvGallery.addItemDecoration(
             LinearEdgeDecoration(
-                startPadding = ((screenWidth() - 212.dp2px) / 2),
-                endPadding = ((screenWidth() - 212.dp2px) / 2),
-                itemMargin = 16.dp2px,
+                startPadding = ((screenWidth() - 254.dp2px) / 2),
+                endPadding = ((screenWidth() - 254.dp2px) / 2),
+                itemMargin = 34.dp2px,
                 orientation = RecyclerView.HORIZONTAL
             )
         )

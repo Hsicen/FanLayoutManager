@@ -36,37 +36,43 @@ class LinearEdgeDecoration(
             if (position == 0) {
                 if (!inverted) {
                     outRect.left = startPadding
+                    outRect.right = itemMargin / 2
                 } else {
                     outRect.right = startPadding
+                    outRect.left = itemMargin / 2
                 }
             } else if (position == itemCount - 1) {
                 if (!inverted) {
                     outRect.right = endPadding
-                    outRect.left = itemMargin
+                    outRect.left = itemMargin / 2
                 } else {
                     outRect.left = endPadding
-                    outRect.right = itemMargin
+                    outRect.right = itemMargin / 2
                 }
             } else {
-                outRect.left = itemMargin
+                outRect.left = itemMargin / 2
+                outRect.right = itemMargin / 2
             }
         } else {
             if (position == 0) {
                 if (!inverted) {
                     outRect.top = startPadding
+                    outRect.bottom = itemMargin / 2
                 } else {
                     outRect.bottom = startPadding
+                    outRect.top = itemMargin / 2
                 }
             } else if (position == itemCount - 1) {
                 if (!inverted) {
                     outRect.bottom = endPadding
-                    outRect.top = itemMargin
+                    outRect.top = itemMargin / 2
                 } else {
                     outRect.top = endPadding
-                    outRect.bottom = itemMargin
+                    outRect.bottom = itemMargin / 2
                 }
             } else {
-                outRect.top = itemMargin
+                outRect.top = itemMargin / 2
+                outRect.bottom = itemMargin / 2
             }
         }
     }
